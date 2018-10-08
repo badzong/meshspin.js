@@ -112,7 +112,7 @@ function MeshSpin(fig, scale) {
 
     if (this.background)
     {
-		this.backgroundPoly = nodes.map(x => this.fig.nodes[x].x.toString() + ',' + this.fig.nodes[x].y.toString())
+        this.backgroundPoly = nodes.map(x => this.fig.nodes[x].x.toString() + ',' + this.fig.nodes[x].y.toString())
     }
 
     return [nodes, outline];

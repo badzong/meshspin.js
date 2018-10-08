@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-		<title>meshspin.js</title>
+    <title>meshspin.js</title>
     <meta charset="utf-8">
     <style>
       #mesh { height: 400px; width: 400px; }
@@ -11,11 +11,11 @@
     </style>
   </head>
   <body>
-		<div id="mesh"></div>
-		<script src="meshspin.min.js"></script>
-		<script>
+        <div id="mesh"></div>
+        <script src="meshspin.min.js"></script>
+        <script>
       var cube = {}
-			cube.nodes = [
+      cube.nodes = [
         {x:1, y: 1, z: -1},
         {x:1, y: -1, z: -1},
         {x:-1, y: -1, z: -1},
@@ -27,7 +27,7 @@
       ];
       cube.edges = [[0,1], [0,3], [0,4], [1,5], [1,2], [2,3], [2,6], [3,7], [4,5], [4,7], [5,6], [6,7]];
 
-			var mesh = new MeshSpin(cube, 50);
+      var mesh = new MeshSpin(cube, 50);
       mesh.setup('mesh');
       mesh.getRotationOffset = mesh.rotateByMouse;
       mesh.fake3D = true;
