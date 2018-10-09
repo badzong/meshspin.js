@@ -1,6 +1,5 @@
-function MeshSpin(fig, scale) {
-  this.fig = fig;
-  this.scaleFactor = scale;
+function MeshSpin() {
+  this.scaleFactor = 50;
   this.fps = 60;
   this.viewBox = [-100, -100, 200, 200];
   this.fake3D = false;
@@ -9,10 +8,27 @@ function MeshSpin(fig, scale) {
   this.background = false;
   this.fillColor = null;
 
+  // Default figure is a tetrahedron
+  this.fig = {
+    nodes: [
+      { x:Math.sqrt(8/9), y:0, z:-1/3},
+      { x:-Math.sqrt(2/9), y:Math.sqrt(2/3), z:-1/3},
+      { x:-Math.sqrt(2/9), y:-Math.sqrt(2/3), z:-1/3},
+      { x:0, y:0, z:1},
+    ].map(n => ({x: n.x*this.scaleFactor,y: n.y * this.scaleFactor, z: n.z * this.scaleFactor})),
+    edges: [[3, 2], [0, 2], [1, 2], [3, 0], [3, 1], [1, 0]]
+  };
+
   this.staticRotation = {
     x: 0.01,
     y: 0.01,
     z: 0.01,
+  };
+
+  // Create a deep copy of figure
+  this.figure = function(figure) {
+    this.fig = JSON.parse(JSON.stringify(figure));
+    this.scale();
   };
 
   this.scale = function() {
@@ -21,7 +37,8 @@ function MeshSpin(fig, scale) {
     ));
   };
 
-  this.rotate = r => this.fig.nodes.map(n => ({
+  this.rotate = function(r) {
+    this.fig.nodes = this.fig.nodes.map(n => ({
       // X-Axis
       x: n.x * Math.cos(r.x) - n.z * Math.sin(r.x),
       y: n.y,
@@ -37,6 +54,7 @@ function MeshSpin(fig, scale) {
       y: n.y * Math.cos(r.z) + n.x * Math.sin(r.z),
       z: n.z,
     }));
+  };
 
   this.sortEdges = function(edges) {
     for(i = 0; i < edges.length; ++i) {
@@ -60,8 +78,6 @@ function MeshSpin(fig, scale) {
 
     var parentElement = document.getElementById(parentId);
     parentElement.appendChild(this.svg);
-
-    this.scale();
 
     document.addEventListener('mousemove', this.mouseUpdate(), false);
     document.addEventListener('mouseenter', this.mouseUpdate(), false);
@@ -144,7 +160,7 @@ function MeshSpin(fig, scale) {
     }
 
     var r = this.getRotationOffset();
-    this.fig.nodes = this.rotate(r);
+    this.rotate(r);
 
     var edges = this.fake3D? this.fake3Dedges(): this.fig.edges;
 
@@ -227,8 +243,8 @@ function MeshSpin(fig, scale) {
   this.rotateByMouse = function() {
     var deltaFactor = 0.01;
     return {
-      x: this.Mouse.delta.x * deltaFactor,
-      y: this.Mouse.delta.y * deltaFactor,
+      x: (this.Mouse.prev.x - this.Mouse.x) * deltaFactor,
+      y: (this.Mouse.prev.y - this.Mouse.y) * deltaFactor,
       z: 0,
     }
   }
@@ -244,31 +260,26 @@ function MeshSpin(fig, scale) {
   this.Mouse = {
     x: 0,
     y: 0,
-    delta: { x: 0, y: 0, },
+    prev: { x: 0, y: 0, },
   };
   this.mouseInterval = null;
   this.mouseUpdate = function() {
     var ref = this;
-    return function(e) {
-      var clearDeltaTimeout = 100;
-      var delta = {
-        x: ref.Mouse.x - e.pageX,
-        y: ref.Mouse.y - e.pageY,
-      }
+    return function doMouseUpdate(e) {
       ref.Mouse = {
         x: e.pageX,
         y: e.pageY,
-        delta: delta,
+        prev: { x: ref.Mouse.x, y: ref.Mouse.y },
       }
 
       if (ref.mouseInterval) {
         clearInterval(ref.mouseInterval);
-        ref.mouseInterval = false;
+        ref.mouseInterval = null;
       }
 
       ref.mouseInterval = setInterval(function() {
-        ref.Mouse.delta = { x: 0, y: 0, }
-      }, clearDeltaTimeout);
+        ref.Mouse.prev = { x: ref.Mouse.x, y: ref.Mouse.y };
+      }, 100);
     }
   }
 }
