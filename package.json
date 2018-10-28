@@ -3,7 +3,9 @@
     "version": "0.0.1",
     "description": "Spins a 3D mesh in SVG using JavaScript without dependencies.",
     "main": "meshspin.js",
+    "homepage": "https://kickstart.ch/pages/meshspin-js.html",
     "repository": "https://github.com/badzong/meshspin.js.git",
+    "bugs": "https://github.com/badzong/meshspin.js/issues",
     "author": "Manuel Badzong",
     "license": "Unlicense"
 }
