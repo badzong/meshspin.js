@@ -1,11 +1,14 @@
 (function(FuseBox){FuseBox.$fuse$=FuseBox;
 FuseBox.target = "browser";
-FuseBox.pkg("default", {}, function(___scope___){
+FuseBox.pkg("mesh-spin", {}, function(___scope___){
 ___scope___.file("meshspin.js", function(exports, require, module, __filename, __dirname){
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function default_1() {
+class MeshSpin {
+}
+exports.MeshSpin = MeshSpin;
+() => {
     this.scaleFactor = 50;
     this.fps = 60;
     this.viewBox = [-100, -100, 200, 200];
@@ -239,14 +242,14 @@ function default_1() {
             }, 100);
         };
     };
-}
-exports.default = default_1;
+};
 
 });
 return ___scope___.entry = "meshspin.js";
 });
-FuseBox.expose([{"alias":"MeshSpin","pkg":"default/meshspin.js"}]);
-FuseBox.main("default/meshspin.js");
+FuseBox.expose([{"alias":{"MeshSpin":"MeshSpin"},"pkg":"mesh-spin/meshspin.js"}]);
+FuseBox.main("mesh-spin/meshspin.js");
+FuseBox.defaultPackageName = "mesh-spin";
 })
 ((function(__root__){
 if (__root__["FuseBox"]) return __root__["FuseBox"];

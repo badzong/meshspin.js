@@ -1,4 +1,4 @@
-export default function() {
+export class MeshSpin() {
   this.scaleFactor = 50;
   this.fps = 60;
   this.viewBox = [-100, -100, 200, 200];

@@ -7,8 +7,11 @@ if (process.env.NODE_ENV === "production") {
 const fuse = FuseBox.init({
   homeDir: "src",
   globals: {
-    default: 'MeshSpin'
+    "mesh-spin": {
+      'MeshSpin': 'MeshSpin'
+    }
   },
+  package: "mesh-spin",
   debug: true,
   target: "browser@es6",
   output: "dist/$name.js",
