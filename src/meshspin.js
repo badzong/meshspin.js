@@ -1,4 +1,4 @@
-function MeshSpin() {
+export default function() {
   this.scaleFactor = 50;
   this.fps = 60;
   this.viewBox = [-100, -100, 200, 200];
@@ -57,7 +57,7 @@ function MeshSpin() {
   };
 
   this.sortEdges = function(edges) {
-    for(i = 0; i < edges.length; ++i) {
+    for(let i = 0; i < edges.length; ++i) {
       edges[i].sort();
     }
     var strEdges = edges
@@ -67,7 +67,7 @@ function MeshSpin() {
     strEdges.sort()
     return strEdges;
   }
-  
+
   this.setup = function(parentId) {
     this.fig.edges = this.sortEdges(this.fig.edges);
 
@@ -99,9 +99,9 @@ function MeshSpin() {
 
     prevVector = vecSub(this.fig.nodes[current], prevNode);
     var angles = this.fig.nodes
-      .map(n => vecSub(n, this.fig.nodes[current]))
-      .map(n => alpha(prevVector, n))
-      .map((n, i) => i == current || i == prev || isNaN(n)? 7: n); // 7 > 2PI
+                     .map(n => vecSub(n, this.fig.nodes[current]))
+                     .map(n => alpha(prevVector, n))
+                     .map((n, i) => i == current || i == prev || isNaN(n)? 7: n); // 7 > 2PI
 
     return angles.indexOf(Math.min.apply(Math, angles));
   }
@@ -128,7 +128,7 @@ function MeshSpin() {
 
     if (this.background)
     {
-        this.backgroundPoly = nodes.map(x => this.fig.nodes[x].x.toString() + ',' + this.fig.nodes[x].y.toString())
+      this.backgroundPoly = nodes.map(x => this.fig.nodes[x].x.toString() + ',' + this.fig.nodes[x].y.toString())
     }
 
     return [nodes, outline];
@@ -139,14 +139,14 @@ function MeshSpin() {
     outlineNodes = outline[0];
 
     var edges = outline[1].concat(this.fig.edges
-      .map(x => x.split(this.edgeSeperator).map(y => parseInt(y)))
-      .filter(x =>
-          (this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0) ||
-          (this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) == -1) ||
-          (this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) == -1)
-      )
-      .map(x => x.join(this.edgeSeperator)))
-      .filter((v, i, a) => a.indexOf(v) === i);
+                                      .map(x => x.split(this.edgeSeperator).map(y => parseInt(y)))
+                                      .filter(x =>
+                                        (this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0) ||
+                                                 (this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) == -1) ||
+                                                 (this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) == -1)
+                                      )
+                                      .map(x => x.join(this.edgeSeperator)))
+                          .filter((v, i, a) => a.indexOf(v) === i);
 
     edges.sort();
 
@@ -174,7 +174,7 @@ function MeshSpin() {
       this.svg.appendChild(poly);
     }
 
-    for (n = 0; n < edges.length; n++) {
+    for (let n = 0; n < edges.length; n++) {
       var edge = edges[n].split(this.edgeSeperator);
       var line = document.createElementNS(this.ns,'line');
       line.setAttribute('x1', this.fig.nodes[edge[0]].x);
@@ -192,7 +192,7 @@ function MeshSpin() {
   };
 
   this.drawDebugNodes = function() {
-    for (n = 0; n < this.fig.nodes.length; n++) {
+    for (let n = 0; n < this.fig.nodes.length; n++) {
       var text = document.createElementNS(this.ns,'text');
       text.setAttribute('x', this.fig.nodes[n].x);
       text.setAttribute('y', this.fig.nodes[n].y);

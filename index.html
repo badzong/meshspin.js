@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <script type="text/javascript" src="http://localhost:8080/skewer"></script>
+    <script type="text/javascript" src="meshspin.js"></script>
+  </head>
+  <body>
+    <div id="wrapper" style="width:48%"></div>
+    <div id="wrapper2" style="width:48%"></div>
+    <script>
+      var phi = (1 + Math.sqrt(5)) / 2;
+      var dodecahedron = {}
+      dodecahedron.nodes = [
+        {x:1, y: 1, z: 1},
+        {x:1, y: 1, z: -1},
+        {x:1, y: -1, z: 1},
+        {x:1, y: -1, z: -1},
+        {x:-1, y: 1, z: 1},
+        {x:-1, y: 1, z: -1},
+        {x:-1, y: -1, z: 1},
+        {x:-1, y: -1, z: -1},
+        {x:0, y: phi, z: 1/phi},
+        {x:0, y: phi, z: -1/phi},
+        {x:0, y: -phi, z: 1/phi},
+        {x:0, y: -phi, z: -1/phi},
+        {x:1/phi, y: 0, z: phi},
+        {x:1/phi, y: 0, z: -phi},
+        {x:-1/phi, y: 0, z: phi},
+        {x:-1/phi, y: 0, z: -phi},
+        {x:phi, y: 1/phi, z: 0},
+        {x:phi, y: -1/phi, z: 0},
+        {x:-phi, y: 1/phi, z: 0},
+        {x:-phi, y: -1/phi, z: 0},
+      ];
+      dodecahedron.edges = [[0,16], [0,8], [0,12], [1,9], [1,13], [1,16], [2,10], [2,12], [2,17], [3,11], [3,13], [3,17], [4,8], [4,14], [4,18], [5,9], [5,15], [5,18], [6,10], [6,14], [6,19], [7,11], [7,15], [7,19], [8,9], [10,11], [12,14], [13,15], [16,17], [18,19]];
+      var mesh = new MeshSpin();
+      mesh.figure(dodecahedron);
+      mesh.setup('wrapper');
+      mesh.staticRotation = {x: -0.001, y: 0, z: 0.001};
+      mesh.run();
+
+      // var mesh2 = new MeshSpin();
+      // mesh2.figure(dodecahedron);
+      // mesh2.setup("wrapper2");
+      // mesh2.run();
+    </script>
+
+  </body>
+</html>
