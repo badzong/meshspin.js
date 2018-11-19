@@ -6,12 +6,7 @@ if (process.env.NODE_ENV === "production") {
 
 const fuse = FuseBox.init({
   homeDir: "src",
-  globals: {
-    "mesh-spin": {
-      'MeshSpin': 'MeshSpin'
-    }
-  },
-  package: "mesh-spin",
+  //  globals: { MeshSpin: "MeshSpin"},
   debug: true,
   target: "browser@es6",
   output: "dist/$name.js",
@@ -23,13 +18,16 @@ const fuse = FuseBox.init({
     isProduction && QuantumPlugin({
       target: "npm-browser",
       treeshake: true,
+      uglify: true,
+      bakeApiIntoBundle: "meshspin.min.js",
+      containedAPI: true,
     })
   ],
   cache: false,
 });
 fuse.dev(); // launch http server
 fuse
-  .bundle("app")
-  .instructions(" >meshspin.js ")
+  .bundle("meshspin.min.js")
+  .instructions(" >index.ts ")
   .watch();
 fuse.run();
