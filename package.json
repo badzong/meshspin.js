@@ -7,5 +7,15 @@
     "repository": "https://github.com/badzong/meshspin.js.git",
     "bugs": "https://github.com/badzong/meshspin.js/issues",
     "author": "Manuel Badzong",
-    "license": "Unlicense"
+    "license": "Unlicense",
+    "devDependencies": {
+        "fuse-box": "^3.6.0",
+        "typescript": "^3.1.6",
+        "uglify-es": "^3.3.9",
+        "uglify-js": "^3.4.9"
+    },
+    "scripts": {
+        "start": "node fuse.js",
+        "build": "env NODE_ENV='production' node fuse.js"
+    }
 }
