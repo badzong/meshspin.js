@@ -134,7 +134,7 @@ export class MeshSpin {
 
       if (this.props.background)
       {
-        this.fake3D = true;
+        this.props.fake3D = true;
         this.backgroundPoly = nodes.map(x => this.fig.nodes[x].x.toString() + ',' + this.fig.nodes[x].y.toString())
       }
 
@@ -172,7 +172,7 @@ export class MeshSpin {
       var edges = this.props.fake3D? this.fake3Dedges(): this.fig.edges;
 
       if (this.props.background) {
-        this.fake3D = true;
+        this.props.fake3D = true;
         var poly = document.createElementNS(this.ns,'polygon');
         poly.setAttribute('points', this.backgroundPoly.join(' '));
         poly.setAttribute('class', 'meshspin-background');
