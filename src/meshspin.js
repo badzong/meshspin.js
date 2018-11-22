@@ -110,6 +110,8 @@ export class MeshSpin {
       return angles.indexOf(Math.min.apply(Math, angles));
     };
 
+    this.backgroundPoly = {}
+
     this.outlineEdges = function() {
       var next;
       //
