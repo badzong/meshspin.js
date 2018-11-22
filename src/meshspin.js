@@ -15,7 +15,7 @@ export class MeshSpin {
       },
       viewBox: [-100, -100, 200, 200],
       ...userDefinedProperties,
-    }
+    };
 
     // Default figure is a tetrahedron
     this.fig = {
@@ -68,7 +68,7 @@ export class MeshSpin {
 
       strEdges.sort()
       return strEdges;
-    }
+    };
 
     this.setup = function(parentId) {
       this.fig.edges = this.sortEdges(this.fig.edges);
@@ -86,6 +86,8 @@ export class MeshSpin {
     };
 
     this.nextOutlineNode = function(current, prev) {
+      var prevNode = {};
+      //
       function vecSub(v1, v2) {
         return { x: v1.x - v2.x, y: v1.y - v2.y };
       }
@@ -99,16 +101,18 @@ export class MeshSpin {
         prevNode = this.fig.nodes[prev];
       }
 
-      prevVector = vecSub(this.fig.nodes[current], prevNode);
+      let prevVector = vecSub(this.fig.nodes[current], prevNode);
       var angles = this.fig.nodes
           .map(n => vecSub(n, this.fig.nodes[current]))
           .map(n => alpha(prevVector, n))
-          .map((n, i) => i == current || i == prev || isNaN(n)? 7: n); // 7 > 2PI
+          .map((n, i) => i === current || i === prev || isNaN(n)? 7: n); // 7 > 2PI
 
       return angles.indexOf(Math.min.apply(Math, angles));
     }
 
     this.outlineEdges = function() {
+      var next;
+      //
       var nodes = [];
       var outline = [];
 
@@ -124,7 +128,7 @@ export class MeshSpin {
         outline.push([current, next]);
         last = current;
         current = next;
-      } while (current != start);
+      } while (current !== start);
 
       outline = this.sortEdges(outline);
 
@@ -138,14 +142,14 @@ export class MeshSpin {
 
     this.fake3Dedges = function() {
       var outline = this.outlineEdges();
-      outlineNodes = outline[0];
+      var outlineNodes = outline[0];
 
       var edges = outline[1].concat(this.fig.edges
                                     .map(x => x.split(this.props.edgeSeperator).map(y => parseInt(y)))
                                     .filter(x =>
                                             (this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0) ||
-                                            (this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) == -1) ||
-                                            (this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) == -1)
+                                            (this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) === -1) ||
+                                            (this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) === -1)
                                            )
                                     .map(x => x.join(this.props.edgeSeperator)))
           .filter((v, i, a) => a.indexOf(v) === i);
@@ -153,7 +157,7 @@ export class MeshSpin {
       edges.sort();
 
       return edges;
-    }
+    };
 
     this.draw = function() {
       // Remove all elements
@@ -231,7 +235,7 @@ export class MeshSpin {
 
         ref.lastFrame = now;
         ref.draw();
-      }
+      };
     };
 
     this.run = function() {
