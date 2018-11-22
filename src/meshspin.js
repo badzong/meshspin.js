@@ -8,9 +8,15 @@ export class MeshSpin {
       fillColor: null,
       fps: 60,
       scaleFactor: 50,
+      staticRotation: {
+        x: 0.01,
+        y: 0.01,
+        z: 0.01,
+      },
       viewBox: [-100, -100, 200, 200],
       ...userDefinedProperties,
     }
+
     // Default figure is a tetrahedron
     this.fig = {
       nodes: [
@@ -21,13 +27,6 @@ export class MeshSpin {
       ].map(n => ({x: n.x * this.props.scaleFactor,y: n.y * this.props.scaleFactor, z: n.z * this.props.scaleFactor})),
       edges: [[3, 2], [0, 2], [1, 2], [3, 0], [3, 1], [1, 0]]
     };
-
-    this.staticRotation = {
-      x: 0.01,
-      y: 0.01,
-      z: 0.01,
-    };
-
     // Create a deep copy of figure
     this.figure = function(figure) {
       this.fig = JSON.parse(JSON.stringify(figure));

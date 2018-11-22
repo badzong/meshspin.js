@@ -7,16 +7,69 @@
   </head>
   <body>
     <style type="text/css" media="screen">
-      #wrapper {
-        max-width: 500px;
+      #wrapper-pyramid, #wrapper-cube {
+        /*          max-width: 500px; */
+        height: 400px;
+        width: 400px;
       }
+      #wrapper-pyramid svg,
+      #wrapper-cube svg
+      {
+        height: 100%;
+        width: 100%;
+      }
+
+      .meshspin-background {
+        fill: #def;
+      }
+      .meshspin-line {
+        stroke-width: 1px;
+        stroke-linecap: round;
+        stroke: red;
+      }
+
     </style>
     <h1>MeshSpin.js examples</h1>
-    <div id="wrapper"></div>
+    <p>
+      See <a href="http://kickstart.ch/pages/meshspin-js.html">Project page</a> for details.
+    </p>
+    <div id="wrapper-pyramid"></div>
+    <div id="wrapper-cube"></div>
+
     <script>
-      var mesh = new MeshSpin();
-      mesh.setup('wrapper');
-      mesh.run();
+      // var meshPyramid = new MeshSpin({
+      //   //        background: true,
+      // });
+      // meshPyramid.setup('wrapper-pyramid');
+      // meshPyramid.run();
+
+      var cube = {}
+      cube.nodes = [
+        {x:1, y: 1, z: -1},
+        {x:1, y: -1, z: -1},
+        {x:-1, y: -1, z: -1},
+        {x:-1, y: 1, z: -1},
+        {x:1, y: 1, z: 1},
+        {x:1, y: -1, z: 1},
+        {x:-1, y: -1, z: 1},
+        {x:-1, y: 1, z: 1},
+      ];
+      cube.edges = [[0,1], [0,3], [0,4], [1,5], [1,2], [2,3], [2,6], [3,7], [4,5], [4,7], [5,6], [6,7]];
+
+      var meshCube = new MeshSpin({
+        // background: true,
+        // debug: false,
+        // fake3D: true,
+        // scaleFactor: 5,
+        //        staticRotation: { x: 0.01, y: 0.01, z: 0.01 },
+        //viewBox: [-10, -10, 20, 20],
+      });
+      meshCube.staticRotation = { x: 6, y: 0.00, z: 0.00 };
+      meshCube.figure(cube);
+      meshCube.setup('wrapper-cube');
+      meshCube.run();
+
+
     </script>
   </body>
 </html>
