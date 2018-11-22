@@ -63,8 +63,8 @@ export class MeshSpin {
         edges[i].sort();
       }
       var strEdges = edges
-        .map(n => n.join(this.props.edgeSeperator))
-        .filter((v, i, a) => a.indexOf(v) === i);
+          .map(n => n.join(this.props.edgeSeperator))
+          .filter((v, i, a) => a.indexOf(v) === i);
 
       strEdges.sort()
       return strEdges;
@@ -101,9 +101,9 @@ export class MeshSpin {
 
       prevVector = vecSub(this.fig.nodes[current], prevNode);
       var angles = this.fig.nodes
-                       .map(n => vecSub(n, this.fig.nodes[current]))
-                       .map(n => alpha(prevVector, n))
-                       .map((n, i) => i == current || i == prev || isNaN(n)? 7: n); // 7 > 2PI
+          .map(n => vecSub(n, this.fig.nodes[current]))
+          .map(n => alpha(prevVector, n))
+          .map((n, i) => i == current || i == prev || isNaN(n)? 7: n); // 7 > 2PI
 
       return angles.indexOf(Math.min.apply(Math, angles));
     }
@@ -141,14 +141,14 @@ export class MeshSpin {
       outlineNodes = outline[0];
 
       var edges = outline[1].concat(this.fig.edges
-                                        .map(x => x.split(this.props.edgeSeperator).map(y => parseInt(y)))
-                                        .filter(x =>
-                                          (this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0) ||
-                                                   (this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) == -1) ||
-                                                   (this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) == -1)
-                                        )
-                                        .map(x => x.join(this.props.edgeSeperator)))
-                            .filter((v, i, a) => a.indexOf(v) === i);
+                                    .map(x => x.split(this.props.edgeSeperator).map(y => parseInt(y)))
+                                    .filter(x =>
+                                            (this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0) ||
+                                            (this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) == -1) ||
+                                            (this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) == -1)
+                                           )
+                                    .map(x => x.join(this.props.edgeSeperator)))
+          .filter((v, i, a) => a.indexOf(v) === i);
 
       edges.sort();
 
@@ -239,7 +239,7 @@ export class MeshSpin {
     };
 
     this.getRotationOffset = function() {
-      return this.staticRotation;
+      return this.props.staticRotation;
     };
 
     this.rotateByMouse = function() {
