@@ -110,7 +110,7 @@ export class MeshSpin {
       return angles.indexOf(Math.min.apply(Math, angles));
     };
 
-    this.backgroundPoly = {}
+    this.backgroundPoly = []
 
     this.outlineEdges = function() {
       var next;
@@ -148,14 +148,14 @@ export class MeshSpin {
       var outlineNodes = outline[0];
 
       var edges = outline[1].concat(this.fig.edges
-                                    .map(x => x.split(this.props.edgeSeperator).map(y => parseInt(y, 10)))
-                                    .filter(x =>
-                                            this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0 ||
-                                            this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) === -1 ||
-                                            this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) === -1
-                                           )
-                                    .map(x => x.join(this.props.edgeSeperator)))
-          .filter((v, i, a) => a.indexOf(v) === i);
+                                        .map(x => x.split(this.props.edgeSeperator).map(y => parseInt(y, 10)))
+                                        .filter(x =>
+                                          this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0 ||
+                                                   this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) === -1 ||
+                                                   this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) === -1
+                                        )
+                                        .map(x => x.join(this.props.edgeSeperator)))
+                            .filter((v, i, a) => a.indexOf(v) === i);
 
       edges.sort();
 
