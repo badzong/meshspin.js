@@ -7,6 +7,11 @@ export class MeshSpin {
       fake3D: false,
       fillColor: null,
       fps: 60,
+      orientation: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
       scaleFactor: 50,
       staticRotation: {
         x: 0.01,
@@ -39,13 +44,6 @@ export class MeshSpin {
       ));
     };
 
-    this.setOrientation = function(o = {}) {
-      if (Object.keys(o).length === 0) {
-        const r = this.props.orientation
-        this.rotate(r);
-      }
-    }
-
     this.rotate = function(r) {
       this.fig.nodes = this.fig.nodes.map(n => ({
         // X-Axis
@@ -70,12 +68,14 @@ export class MeshSpin {
         edges[i].sort();
       }
       var strEdges = edges
-        .map(n => n.join(this.props.edgeSeperator))
-        .filter((v, i, a) => a.indexOf(v) === i);
+          .map(n => n.join(this.props.edgeSeperator))
+          .filter((v, i, a) => a.indexOf(v) === i);
 
       strEdges.sort()
       return strEdges;
     };
+
+    this.rotate(this.props.orientation);
 
     this.setup = function(parentId) {
       this.fig.edges = this.sortEdges(this.fig.edges);
@@ -110,9 +110,9 @@ export class MeshSpin {
 
       let prevVector = vecSub(this.fig.nodes[current], prevNode);
       var angles = this.fig.nodes
-                       .map(n => vecSub(n, this.fig.nodes[current]))
-                       .map(n => alpha(prevVector, n))
-                       .map((n, i) => i === current || i === prev || isNaN(n)? 7: n); // 7 > 2PI
+          .map(n => vecSub(n, this.fig.nodes[current]))
+          .map(n => alpha(prevVector, n))
+          .map((n, i) => i === current || i === prev || isNaN(n)? 7: n); // 7 > 2PI
 
       return angles.indexOf(Math.min.apply(Math, angles));
     };
@@ -155,14 +155,14 @@ export class MeshSpin {
       var outlineNodes = outline[0];
 
       var edges = outline[1].concat(this.fig.edges
-                                        .map(x => x.split(this.props.edgeSeperator).map(y => parseInt(y, 10)))
-                                        .filter(x =>
-                                          this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0 ||
-                                                   this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) === -1 ||
-                                                   this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) === -1
-                                        )
-                                        .map(x => x.join(this.props.edgeSeperator)))
-                            .filter((v, i, a) => a.indexOf(v) === i);
+                                    .map(x => x.split(this.props.edgeSeperator).map(y => parseInt(y, 10)))
+                                    .filter(x =>
+                                            this.fig.nodes[x[0]].z >= 0 && this.fig.nodes[x[1]].z >= 0 ||
+                                            this.fig.nodes[x[0]].z >= this.fig.nodes[x[1]].z && outlineNodes.indexOf(x[1]) >= 0 && outlineNodes.indexOf(x[0]) === -1 ||
+                                            this.fig.nodes[x[1]].z >= this.fig.nodes[x[0]].z && outlineNodes.indexOf(x[0]) >= 0 && outlineNodes.indexOf(x[1]) === -1
+                                           )
+                                    .map(x => x.join(this.props.edgeSeperator)))
+          .filter((v, i, a) => a.indexOf(v) === i);
 
       edges.sort();
 
@@ -263,9 +263,8 @@ export class MeshSpin {
         x: (this.Mouse.prev.x - this.Mouse.x) * deltaFactor,
         y: (this.Mouse.prev.y - this.Mouse.y) * deltaFactor,
         z: 0,
-      }
-    }
-
+      };
+    };
 
     this.colorStatic = function(color) {
       return function() {
