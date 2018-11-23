@@ -1,0 +1,4 @@
+Use public functions to manipulate polyhedron based on events, passage of time, or other
+Add a eslint file
+added eslint file and notes from todo workflow
+debug values should not scale
