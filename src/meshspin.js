@@ -39,6 +39,13 @@ export class MeshSpin {
       ));
     };
 
+    this.setOrientation = function(o = {}) {
+      if (Object.keys(o).length === 0) {
+        const r = this.props.orientation
+        this.rotate(r);
+      }
+    }
+
     this.rotate = function(r) {
       this.fig.nodes = this.fig.nodes.map(n => ({
         // X-Axis
@@ -63,8 +70,8 @@ export class MeshSpin {
         edges[i].sort();
       }
       var strEdges = edges
-          .map(n => n.join(this.props.edgeSeperator))
-          .filter((v, i, a) => a.indexOf(v) === i);
+        .map(n => n.join(this.props.edgeSeperator))
+        .filter((v, i, a) => a.indexOf(v) === i);
 
       strEdges.sort()
       return strEdges;
@@ -103,9 +110,9 @@ export class MeshSpin {
 
       let prevVector = vecSub(this.fig.nodes[current], prevNode);
       var angles = this.fig.nodes
-          .map(n => vecSub(n, this.fig.nodes[current]))
-          .map(n => alpha(prevVector, n))
-          .map((n, i) => i === current || i === prev || isNaN(n)? 7: n); // 7 > 2PI
+                       .map(n => vecSub(n, this.fig.nodes[current]))
+                       .map(n => alpha(prevVector, n))
+                       .map((n, i) => i === current || i === prev || isNaN(n)? 7: n); // 7 > 2PI
 
       return angles.indexOf(Math.min.apply(Math, angles));
     };
@@ -258,6 +265,7 @@ export class MeshSpin {
         z: 0,
       }
     }
+
 
     this.colorStatic = function(color) {
       return function() {

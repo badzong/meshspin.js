@@ -40,7 +40,9 @@
       var meshPyramid = new MeshSpin({
         background: true,
         staticRotation: {x:0,y:0,z:0},
+        orientation: {x: 1.6, y:0,z:0},
       });
+      meshPyramid.setOrientation();
       meshPyramid.setup('wrapper-pyramid');
       meshPyramid.run();
 
