@@ -75,9 +75,8 @@ export class MeshSpin {
       return strEdges;
     };
 
-    this.rotate(this.props.orientation);
-
     this.setup = function(parentId) {
+      this.rotate(this.props.orientation);
       this.fig.edges = this.sortEdges(this.fig.edges);
 
       // Setup SVG
