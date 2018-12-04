@@ -1,6 +1,8 @@
+// -*- mode:js2 -*-
 export class MeshSpin {
   constructor(userDefinedProperties = {}) {
     this.props = {
+      animate: true,
       background: false,
       debug: false,
       edgeSeperator:',',
@@ -234,6 +236,8 @@ export class MeshSpin {
 
         if (!ref.currentFrame) {
           ref.currentFrame = 0;
+        } else if (!ref.props.animate) {
+          return;
         }
         ++ref.currentFrame;
 
