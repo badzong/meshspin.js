@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8"/>
     <title>MeshSpin.js examples</title>
-    $bundles
+    <script   type="text/javascript" src="/meshspin.min.js"></script>
   </head>
   <body>
     <style type="text/css" media="screen">
-      #wrapper-pyramid, #wrapper-cube {
+      #wrapper-tetra, #wrapper-cube {
         /*          max-width: 500px; */
         height: 400px;
         width: 400px;
       }
-      #wrapper-pyramid svg,
+      #wrapper-tetra svg,
       #wrapper-cube svg
       {
         height: 100%;
@@ -33,16 +33,17 @@
     <p>
       See <a href="http://kickstart.ch/pages/meshspin-js.html">Project page</a> for details.
     </p>
-    <div id="wrapper-pyramid"></div>
+    <div id="wrapper-tetra"></div>
     <div id="wrapper-cube"></div>
 
     <script>
-      var meshPyramid = new MeshSpin({
+      var meshTetra = new MeshSpin({
+        animate: true,
         background: true,
         orientation: { x: 0, y: 0, z: 0},
       });
-      meshPyramid.setup('wrapper-pyramid');
-      meshPyramid.run();
+      meshTetra.setup('wrapper-tetra');
+      meshTetra.run();
 
       var cube = {}
       cube.nodes = [
