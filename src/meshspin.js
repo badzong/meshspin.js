@@ -9,6 +9,11 @@ export class MeshSpin {
       fake3D: false,
       fillColor: null,
       fps: 60,
+      orientation: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
       scaleFactor: 50,
       staticRotation: {
         x: 0.01,
@@ -73,6 +78,7 @@ export class MeshSpin {
     };
 
     this.setup = function(parentId) {
+      this.rotate(this.props.orientation);
       this.fig.edges = this.sortEdges(this.fig.edges);
 
       // Setup SVG
@@ -112,7 +118,7 @@ export class MeshSpin {
       return angles.indexOf(Math.min.apply(Math, angles));
     };
 
-    this.backgroundPoly = {}
+    this.backgroundPoly = []
 
     this.outlineEdges = function() {
       var next;
@@ -260,8 +266,8 @@ export class MeshSpin {
         x: (this.Mouse.prev.x - this.Mouse.x) * deltaFactor,
         y: (this.Mouse.prev.y - this.Mouse.y) * deltaFactor,
         z: 0,
-      }
-    }
+      };
+    };
 
     this.colorStatic = function(color) {
       return function() {
