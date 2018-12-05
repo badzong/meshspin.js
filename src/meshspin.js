@@ -231,6 +231,9 @@ export class MeshSpin {
       var ref = this;
       return function animate(now) {
         requestAnimationFrame(animate);
+        if (!ref.props.animate) {
+          return;
+        }
 
         if (!ref.lastFrame) {
           ref.lastFrame = now;
@@ -242,8 +245,6 @@ export class MeshSpin {
 
         if (!ref.currentFrame) {
           ref.currentFrame = 0;
-        } else if (!ref.props.animate) {
-          return;
         }
         ++ref.currentFrame;
 
