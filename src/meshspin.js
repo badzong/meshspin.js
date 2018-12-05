@@ -239,7 +239,7 @@ export class MeshSpin {
           ref.lastFrame = now;
         }
 
-        if ((now - ref.lastFrame) < 1000 / ref.fps) {
+        if ((now - ref.lastFrame) < 1000 / ref.props.fps) {
           return;
         }
 
