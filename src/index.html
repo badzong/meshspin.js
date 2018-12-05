@@ -6,13 +6,13 @@
     $bundles
   </head>
   <body>
-    <style type="text/css" media="screen">
-      #wrapper-pyramid, #wrapper-cube {
+    <style media="screen">
+      #wrapper-tetra, #wrapper-cube {
         /*          max-width: 500px; */
         height: 400px;
         width: 400px;
       }
-      #wrapper-pyramid svg,
+      #wrapper-tetra svg,
       #wrapper-cube svg
       {
         height: 100%;
@@ -33,16 +33,17 @@
     <p>
       See <a href="http://kickstart.ch/pages/meshspin-js.html">Project page</a> for details.
     </p>
-    <div id="wrapper-pyramid"></div>
+    <div id="wrapper-tetra"></div>
     <div id="wrapper-cube"></div>
 
     <script>
-      var meshPyramid = new MeshSpin({
+      var meshTetra = new MeshSpin({
+        animate: true,
         background: true,
         orientation: { x: 0, y: 0, z: 0},
       });
-      meshPyramid.setup('wrapper-pyramid');
-      meshPyramid.run();
+      meshTetra.setup('wrapper-tetra');
+      meshTetra.run();
 
       var cube = {}
       cube.nodes = [
@@ -58,6 +59,7 @@
       cube.edges = [[0,1], [0,3], [0,4], [1,5], [1,2], [2,3], [2,6], [3,7], [4,5], [4,7], [5,6], [6,7]];
 
       var meshCube = new MeshSpin({
+        animate: false,
         background: true,
         debug: false,
         fake3D: true,
