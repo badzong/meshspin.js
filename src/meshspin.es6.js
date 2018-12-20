@@ -1,4 +1,6 @@
-function MeshSpin() {
+// -*- mode:js2 -*-
+export class MeshSpin {
+  constructor(userDefinedProperties = {}) {
 // CAVEAT: See meshspin.common.js.m4 and meshspin.es6.js.m4
 this.props = {
   animate: true,
@@ -302,4 +304,5 @@ this.mouseUpdate = function() {
   }
 }
 
+  }
 }

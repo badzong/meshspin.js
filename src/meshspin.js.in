@@ -1,4 +1,3 @@
-function MeshSpin() {
 // CAVEAT: See meshspin.common.js.m4 and meshspin.es6.js.m4
 this.props = {
   animate: true,
@@ -300,6 +299,4 @@ this.mouseUpdate = function() {
       ref.Mouse.prev = { x: ref.Mouse.x, y: ref.Mouse.y };
     }, 100);
   }
-}
-
 }
