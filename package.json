@@ -1,6 +1,6 @@
 {
     "name": "meshspin.js",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Spins a 3D mesh in SVG using JavaScript without dependencies.",
     "main": "meshspin.js",
     "homepage": "https://kickstart.ch/pages/meshspin-js.html",
